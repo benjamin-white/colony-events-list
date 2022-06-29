@@ -1,0 +1,19 @@
+.EventCard {
+
+  align-items: center;
+  background-color: #fff;;
+  display: flex;
+
+}
+
+.EventCardTitle {
+
+  font-weight: 400;
+
+}
+
+.EventCardTitle strong {
+
+  font-weight: 700;
+
+}
