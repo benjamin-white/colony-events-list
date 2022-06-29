@@ -8,7 +8,11 @@ export type EventType =
   | 'ColonyRoleSet'
   | 'PayoutClaimed';
 
-const getEventsList = async (): Promise<EventsListType> => {
+interface GetEventsList {
+  (): Promise<EventsListType>
+}
+
+const getEventsList: GetEventsList = async () => {
 
   const connection = await connect();
 

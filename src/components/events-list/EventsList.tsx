@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import EventCard from '../event-card';
 import getEventsList from '../../utils/get-events-list';
+import styles from './EventsList.module.css';
 import type { EventItemProps } from '../event-card';
 
 export type EventsListType = EventItemProps[];
@@ -17,15 +18,17 @@ const EventsList = () => {
   }, []);
 
   return (
-    <ul>{events.map((event, index) =>
-      <EventCard
-        key={index}
-        timestamp={event.timestamp}
-        message={event.message}
-        userAddress={event.userAddress}
-        eventType={event.eventType}
-      />
-    )}</ul>
+    <ul className={styles.EventsList}>
+      {events.map((event, index) =>
+        <EventCard
+          key={index}
+          timestamp={event.timestamp}
+          message={event.message}
+          userAddress={event.userAddress}
+          eventType={event.eventType}
+        />
+      )}
+    </ul>
   );
 
 }

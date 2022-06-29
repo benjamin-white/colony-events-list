@@ -1,19 +1,92 @@
 .EventCard {
 
-  align-items: center;
   background-color: #fff;;
   display: flex;
+  margin-bottom: 2px;
+  min-height: 90px;
+  outline: 1px solid rgba(var(--color-shadow), 0);
+  padding: 26px 20px;
+  position: relative;
+  transition: background-color .75s ease-in, box-shadow .75s ease-in, outline-color .5s ease-in;
+
+}
+
+.EventCard:first-of-type {
+
+  border-radius: 6px 6px 0 0;
+
+}
+
+.EventCard:last-of-type {
+
+  border-radius: 0 0 6px 6px;
+
+}
+
+.EventCard::after {
+
+  background-image: linear-gradient(0deg, rgba(var(--color-shadow), 0.07), rgba(var(--color-shadow), 0));
+  bottom: 0;
+  content: '';
+  height: .25rem;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+
+}
+
+.EventCard:hover {
+
+  background-color: rgba(255, 255, 255, .75);
+  box-shadow: inset 0px 0px 10px 0px rgba(var(--color-shadow), 0.14);
+  outline: 1px solid rgba(var(--color-shadow), 0.2);
+  transition: background-color .25s ease-out, box-shadow .25s ease-out, outline-color .2s ease-out;
+
+}
+
+.EventCard:hover .EventCardTitle {
+
+  white-space: unset;
+
+}
+
+.EventCardBody {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding-left: 20px;
+
+}
+
+.EventCardBody time {
+
+  color: var(--color-font--lighter);
+  font-size: var(--font-copy-size--smaller);
+  transition: padding .2s ease;
 
 }
 
 .EventCardTitle {
 
-  font-weight: 400;
+  font-size: var(--font-copy-size);
+  font-weight: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
 }
 
-.EventCardTitle strong {
+:global(.rah-static--height-specific) .EventCardTitle {
 
-  font-weight: 700;
+  white-space: nowrap;
+
+}
+
+:global(.rah-animating--to-height-auto) + time,
+:global(.rah-static--height-auto) + time {
+
+  padding-top: 8px;
 
 }
