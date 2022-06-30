@@ -1,5 +1,14 @@
+@keyframes fade-shadow {
+  0% {
+    box-shadow: 0px 0px 10px 0px rgba(var(--color-shadow), 0);
+  }
+  100% {
+    box-shadow: 0px 0px 10px 0px rgba(var(--color-shadow), 0.14);
+  }
+}
+
 .EventsList {
 
-  box-shadow: 0px 0px 10px 0px rgba(var(--color-shadow), 0.14);
+  animation: fade-shadow .5s .5s ease-out forwards; 
 
 }

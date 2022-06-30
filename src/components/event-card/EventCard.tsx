@@ -1,33 +1,43 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Avatar from '../avatar';
 import styles from './EventCard.module.css';
-import AnimateHeight from "react-animate-height";
+import AnimateHeight from 'react-animate-height';
 import type { EventType } from '../../utils/get-events-list';
 
 export interface Props {
   timestamp: number;
-  message: React.ReactElement<React.ReactFragment>;
+  message: React.ReactElement;
   userAddress: string;
   eventType: EventType;
 }
 
 const EventCard = ({ userAddress, message, timestamp, eventType }: Props) => {
 
-  const date = new Date(timestamp).toLocaleDateString('en-UK', {
-    day: 'numeric',
-    month: 'short',
-  }); // memo?
+  const collapsedTitleHeight = 20;
+  const [height, setHeight] = useState<'auto' | number>(collapsedTitleHeight);
 
-  const [height, setHeight] = useState<'auto'|number>(20);
+  const CachedAvatar = useMemo(() =>
+    <Avatar identity={userAddress} />,
+    [userAddress]
+  );
+  const cachedDate = useMemo(() => (
+    new Date(timestamp).toLocaleDateString('en-UK', {
+      day: 'numeric',
+      month: 'short',
+    })
+  ), [timestamp]);
+
+  const onEnter = useCallback(() => setHeight('auto'), []);
+  const onLeave = useCallback(() => setHeight(collapsedTitleHeight), []);
 
   return (
     <li
       className={styles.EventCard}
       data-event={eventType}
-      onMouseEnter={() => setHeight('auto')}
-      onMouseLeave={() => setHeight(20)}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
     >
-      <Avatar identity={userAddress} />
+      {CachedAvatar}
       <div className={styles.EventCardBody}>
         <AnimateHeight
           duration={200}
@@ -35,7 +45,7 @@ const EventCard = ({ userAddress, message, timestamp, eventType }: Props) => {
         >
           <h2 className={styles.EventCardTitle}>{message}</h2>
         </AnimateHeight>
-        <time>{date}</time>
+        <time>{cachedDate}</time>
       </div>
     </li>
   );

@@ -7,32 +7,36 @@ import type { EventType } from './get-events-list';
 import type { Connection } from './connection';
 import type { EventItemProps } from '../components/event-card'
 
-const COLONY_ADDRESS = '0x5346D0f80e2816FaD329F2c140c870ffc3c3E2Ef';
+interface PopulateEventFields {
+  (
+    arg0: EventType,
+    arg1: Connection,
+    arg2: Log
+  ): Promise<EventItemProps>
+}
 
-const populateEventFields = async (
-  eventType: EventType,
-  connection: Connection,
-  event: Log
-): Promise<EventItemProps> => {
+const populateEventFields: PopulateEventFields = async (eventType, connection, event) => {
 
+  const colonyAddress = '0x5346D0f80e2816FaD329F2c140c870ffc3c3E2Ef';
   const timestamp = await getBlockTime(connection.provider, event.blockHash);
   const parsed = connection.client.interface.parseLog(event);
   const fundingPotId = getFundingPotId(parsed);
+
   const userAddress = await getUserAddress({
-    eventData: { event, parsed },
+    parsedData: parsed,
     connection,
     fundingPotId
   });
+
   const message = await eventMessage({
-    eventData: { event, parsed },
+    parsedData: parsed,
     eventType,
-    connection,
     userAddress,
     fundingPotId
   });
 
   return {
-    userAddress: userAddress || COLONY_ADDRESS,
+    userAddress: userAddress || colonyAddress,
     message,
     eventType,
     timestamp,
@@ -40,7 +44,14 @@ const populateEventFields = async (
 
 };
 
-const eventsByType = async (connection: Connection, eventType: EventType) => {
+interface EventsByType {
+  (
+    arg0: Connection,
+    arg1: EventType
+  ): Promise<EventItemProps[]>
+}
+
+const eventsByType: EventsByType = async (connection, eventType) => {
 
   const rawEvents = await getLogs(connection.client, connection.client.filters[eventType]());
 

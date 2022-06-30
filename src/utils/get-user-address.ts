@@ -1,15 +1,19 @@
 import type { Connection } from './connection';
-import type { EventData } from './event-message';
+import type { EventData } from './get-events-list';
 
-interface Args {
-  eventData: EventData;
-  connection: Connection;
-  fundingPotId: string | null;
+interface GetUserAddress {
+  (
+    arg0: {
+      parsedData: EventData['parsed'];
+      connection: Connection;
+      fundingPotId: string | null
+    }
+  ): Promise<string>
 }
 
-const getUserAddress = async ({ eventData, connection: { client }, fundingPotId }: Args) => {
+const getUserAddress: GetUserAddress = async ({ parsedData, connection: { client }, fundingPotId }) => {
 
-  let userAddress = eventData.parsed.values?.user;
+  let userAddress = parsedData.values.user || '';
 
   if (!userAddress && fundingPotId) {
     const { associatedTypeId } = await client.getFundingPot(fundingPotId);

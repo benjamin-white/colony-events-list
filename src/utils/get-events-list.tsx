@@ -1,5 +1,7 @@
 import eventsByType from './events-by-type';
 import connect from './connection';
+import { BigNumberish } from 'ethers/utils';
+import type { Log } from '@ethersproject/abstract-provider';
 import type { EventsListType } from '../components/events-list';
 
 export type EventType =
@@ -7,6 +9,20 @@ export type EventType =
   | 'DomainAdded'
   | 'ColonyRoleSet'
   | 'PayoutClaimed';
+
+export type EventData = {
+  event: Log;
+  parsed: {
+    values: {
+      domainId: BigNumberish;
+      role: number;
+      amount: BigNumberish;
+      fundingPotId: BigNumberish;
+      user: string;
+      token: string;
+    };
+  };
+};
 
 interface GetEventsList {
   (): Promise<EventsListType>

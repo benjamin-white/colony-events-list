@@ -1,8 +1,11 @@
 import type { EventsListType } from '../components/events-list';
 
-const generateStubData = (size: number = 4): EventsListType => {
+interface GenerateStubData {
+  (n?: number): EventsListType
+}
 
-  return [...Array(size)].map((_, index) => {
+const generateStubData: GenerateStubData = (size = 4) =>
+  [...Array(size)].map((_, index) => {
     return {
       timestamp: 0,
       message: <>Entry <strong>#{index}</strong></>,
@@ -10,7 +13,5 @@ const generateStubData = (size: number = 4): EventsListType => {
       eventType: 'ColonyInitialised',
     }
   });
-
-}
 
 export default generateStubData;

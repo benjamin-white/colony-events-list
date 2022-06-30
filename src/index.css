@@ -3,7 +3,7 @@
 :root {
 
   --color-font: #323030;
-  --color-font--lighter: #423f3f;
+  --color-font--lighter: #716c6c;
   --color-font-darker: #181717;
   --color-shadow: 62, 118, 244;
   --container-width: calc(700px + 2rem);
@@ -45,6 +45,8 @@ html {
 
 body {
 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-image: linear-gradient(0deg, #eaf3f7, #f4f0f3);
   background-attachment: fixed;
   color: var(--color-font);

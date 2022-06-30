@@ -1,12 +1,16 @@
 import { utils } from 'ethers';
 
-interface Args {
-  values: {
-    fundingPotId: string | null;
-  }
+interface GetFundingPotId {
+  (
+    arg0: {
+      values: {
+        fundingPotId?: string | null
+      }
+    }
+  ): string | null
 }
 
-const getFundingPotId = ({ values: { fundingPotId } }: Args) => {
+const getFundingPotId: GetFundingPotId = ({ values: { fundingPotId } }) => {
 
   if (fundingPotId) {
     return new utils.BigNumber(

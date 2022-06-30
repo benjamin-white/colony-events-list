@@ -1,4 +1,4 @@
-import EventsList from "./components/events-list";
+import EventsList from './components/events-list';
 
 const App = () => {
   return (
