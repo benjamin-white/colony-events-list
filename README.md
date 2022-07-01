@@ -1,80 +1,46 @@
-# Colony Coding Challenge Boostrap
+# **Colony Events List**
 
-This repo was bootstrapped with [Create React App @ v5](https://github.com/facebook/create-react-app) but it purposely uses an older version of `react-scripts` which will install `webpack` version `4`.
+This project uses [colonyjs](https://github.com/JoinColony/colonyJS) to retrieve and filter logs from Colony Network smart contracts deployed on the Ethereum mainnet. The filtered logs are used to display a list of events in reverse chronological order with relevant information for each event. Of all available events only the below are currently being used in the list:
 
-This is because the latest version of [CRA](https://github.com/facebook/create-react-app) comes with `webpack` version `5` which dropped support for default node polyfills, meaning you have to manually overwrite CRA's webpack config and polyfill libs like: `crypto`, `http`, `https`, `url`, etc...
++ ColonyInitialised
++ ColonyRoleSet
++ PayoutClaimed
++ DomainAdded
 
-There are obviously more ways of going about it, but for the purpouses of [this coding challenge](https://github.com/JoinColony/coding-challenge-events-list) this approach was the quickest.
+### _**View on [Github Pages](https://benjamin-white.github.io/colony-events-list)**_
+<hr>
 
-So just clone this repo and get started!
 
----
+## _**To Run**_
 
-_Readme below is part of CRA:_
+Clone this project to your local machine.
 
-## Available Scripts
+```shell
+$ git clone git@github.com:benjamin-white/colony-events-list.git && cd colony-events-list
+```
 
-In the project directory, you can run:
+Install the project dependencies.
+```shell
+$ yarn
+```
+Start the development server and watch task.
 
-### `npm start`
+```shell
+$ yarn start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Now the project should be available on [localhost:3000](http://localhost:3000).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## _**Program Structure**_
 
-### `npm test`
+This project is bootstrapped with Create React App and uses **React**, **Typescript** and **CSSModules**. Components are primarily concerned with rendering and state management while data retrieval and processing is handled by functions inside the `/utils` folder. The retrieving and processing of logs principally relies on the [colonyjs](https://github.com/JoinColony/colonyJS) and [ethers](https://github.com/ethers-io/ethers.js/) libraries for all heavy lifting.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The strucure of logs and content of entries was unfamiliar to me and this presented some conceptual challenges in how best to create the list passed into the `EventsList` component. In essence some of the values encountered in Blockchain data were so alien looking it was challenging to pull on a previous mental schematic. I tried to break it down into smaller steps that could mostly be addressed by single functions, but if I were to start again I would probably change the order of this processing and purpose of some functions. The reason would be to have a date ordered flat list initially but defer the transforming of a log entry to `EventCard` consumable data. This would allow the `EventsList` to more easily paginate results and thereby improve first load performance.
 
-### `npm run build`
+The function `generateStubData` in `/utils/_data.stub.tsx` is used to test styling and UI interaction in isoloation from data processing logic and without the need to hit an external API. It does not contribute to the running page.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## _**Future Features &amp; Improvements**_
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
++ Add unit tests for the code in `/utils` and `/components`.
++ Add lazy loading of items in `EventsList`. As suggested above some restructuring might be needed to gain a performance benefit.
++ Animation of line-wrapping in the `EventCard` component currently uses the [React Animate Height](https://www.npmjs.com/package/react-animate-height) package. It would be nice to investigate alternatives that may yield a more refined animation.
