@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/colony-events-list/static/css/main.92c99caa.chunk.css",
+    "main.js": "/colony-events-list/static/js/main.456eb55b.chunk.js",
+    "main.js.map": "/colony-events-list/static/js/main.456eb55b.chunk.js.map",
+    "runtime-main.js": "/colony-events-list/static/js/runtime-main.0ce30f39.js",
+    "runtime-main.js.map": "/colony-events-list/static/js/runtime-main.0ce30f39.js.map",
+    "static/css/2.679831fc.chunk.css": "/colony-events-list/static/css/2.679831fc.chunk.css",
+    "static/js/2.e0a281f2.chunk.js": "/colony-events-list/static/js/2.e0a281f2.chunk.js",
+    "static/js/2.e0a281f2.chunk.js.map": "/colony-events-list/static/js/2.e0a281f2.chunk.js.map",
+    "static/js/3.48c06db3.chunk.js": "/colony-events-list/static/js/3.48c06db3.chunk.js",
+    "static/js/3.48c06db3.chunk.js.map": "/colony-events-list/static/js/3.48c06db3.chunk.js.map",
+    "index.html": "/colony-events-list/index.html",
+    "static/css/2.679831fc.chunk.css.map": "/colony-events-list/static/css/2.679831fc.chunk.css.map",
+    "static/css/main.92c99caa.chunk.css.map": "/colony-events-list/static/css/main.92c99caa.chunk.css.map",
+    "static/js/2.e0a281f2.chunk.js.LICENSE.txt": "/colony-events-list/static/js/2.e0a281f2.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0ce30f39.js",
+    "static/css/2.679831fc.chunk.css",
+    "static/js/2.e0a281f2.chunk.js",
+    "static/css/main.92c99caa.chunk.css",
+    "static/js/main.456eb55b.chunk.js"
+  ]
+}
